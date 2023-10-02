@@ -30,6 +30,7 @@ LPSTR lpCmdLine, int nCmdShow){
         DispatchMessage(&Msg);
     }
 
+
     return Msg.wParam;
 }
 
@@ -82,6 +83,14 @@ bool CreateMyWindow(HWND *hwnd, HINSTANCE hInstance){
 // Step 4: the Window Procedure
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam){
     switch(msg){
+        case WM_LBUTTONDOWN:{
+            char szFileName[MAX_PATH];
+            HINSTANCE hInstance = GetModuleHandle(NULL);
+
+            GetModuleFileName(hInstance, szFileName, MAX_PATH);
+            MessageBox(hwnd, szFileName, "This program is:", MB_OK | MB_ICONINFORMATION);
+        }
+            break;
         case WM_CLOSE:
             DestroyWindow(hwnd);
             break;
